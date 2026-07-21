@@ -27,7 +27,8 @@ elevation, pace:
 You need Docker (Docker Desktop on Windows/Mac, or Docker Engine on Linux).
 
 ```
-git clone <your-repo-url> ahdx
+git clone https://github.com/Hawolex/AHDX.git ahdx
+# or from Gitea:  git clone https://git.skui.io/steffen/AHDX.git ahdx
 cd ahdx
 docker compose up -d --build
 ```
