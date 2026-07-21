@@ -22,6 +22,12 @@ elevation, pace:
 
 ![Workout route with stats](docs/screenshots/dashboard-route.png)
 
+And the app itself — drop in your export, and keep a database per person:
+
+![AHDX import page](docs/screenshots/app-import.png)
+
+![AHDX databases page](docs/screenshots/app-databases.png)
+
 ## Get it running
 
 You need Docker (Docker Desktop on Windows/Mac, or Docker Engine on Linux).
