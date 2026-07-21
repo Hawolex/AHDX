@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Import — AHDX{% endblock %}
+{% block body %}
+<h1>Import health data</h1>
+<p class="muted">
+  On your iPhone: open Health, tap your profile picture, choose "Export All
+  Health Data". You get a file called <code>export.zip</code>. Drop it here.
+  You can also drop the <code>export.xml</code> from inside it.
+</p>
+
+<form method="post" action="{{ url_for('do_import') }}" enctype="multipart/form-data" class="card">
+  <input type="file" name="file" accept=".zip,.xml">
+  <button type="submit">Import into "{{ active_db['name'] }}"</button>
+</form>
+
+<div class="card" id="status-card">
+  <h2>Last import</h2>
+  <div id="status-body">
+    {% include "includes/status.html" %}
+  </div>
+</div>
+
+<div class="card muted">
+  <h2>Hands-free</h2>
+  <p>
+    Drop exports into the <code>data/inbox/</code> folder and AHDX picks them up
+    on a timer (every 30 minutes by default). Or have a free iOS Shortcut POST
+    recent metrics to <code>/ingest</code>. Both feed the same database, and
+    re-sending data you already have does nothing.
+  </p>
+</div>
+
+<script>
+// Poll while an import is running so the numbers move without a refresh.
+function refresh() {
+  fetch("{{ url_for('import_status') }}")
+    .then(r => r.json())
+    .then(s => {
+      const el = document.getElementById("status-body");
+      let html = "<p><strong>State:</strong> " + (s.state || "idle") + "</p>";
+      if (s.source) html += "<p><strong>Source:</strong> " + s.source + "</p>";
+      html += "<p><strong>Rows read:</strong> " + (s.records_seen || 0) +
+              " &nbsp; <strong>new rows added:</strong> " + (s.records_new || 0) + "</p>";
+      if (s.current_type) html += "<p><strong>Now reading:</strong> " + s.current_type + "</p>";
+      if (s.message) html += "<p class='err'>" + s.message + "</p>";
+      if (s.finished_at) html += "<p class='muted'>Finished " + s.finished_at + " UTC</p>";
+      el.innerHTML = html;
+      if (s.state === "running") setTimeout(refresh, 1000);
+    })
+    .catch(() => {});
+}
+refresh();
+</script>
+{% endblock %}

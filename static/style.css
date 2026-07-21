@@ -1,0 +1,159 @@
+/* One hand-written stylesheet, no framework. Plain and legible, works the same
+   in Docker with the machine offline. */
+
+/* Light by default. Dark follows the OS setting, and the toggle in the header
+   overrides it either way (stored in localStorage as data-theme on <html>). */
+:root {
+  --bg: #f5f5f4;
+  --panel: #ffffff;
+  --ink: #1c1c1e;
+  --muted: #6b7280;
+  --line: #e2e2e0;
+  --accent: #0a84ff;   /* the Apple Health blue, roughly */
+  --danger: #c0392b;
+  --ok: #2e7d32;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16171a;
+    --panel: #1e2024;
+    --ink: #e8e8ea;
+    --muted: #9aa0a8;
+    --line: #2c2f36;
+    --accent: #4a9eff;
+    --danger: #ff6b5a;
+    --ok: #5cba5c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #16171a;
+  --panel: #1e2024;
+  --ink: #e8e8ea;
+  --muted: #9aa0a8;
+  --line: #2c2f36;
+  --accent: #4a9eff;
+  --danger: #ff6b5a;
+  --ok: #5cba5c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+
+.brand { font-weight: 700; }
+.brand span { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+
+nav { display: flex; gap: 16px; }
+nav a { text-decoration: none; color: var(--ink); }
+nav a:hover { color: var(--accent); }
+
+.db-picker { margin-left: auto; color: var(--muted); font-size: 13px; }
+.db-picker strong { color: var(--ink); }
+
+main { max-width: 960px; margin: 24px auto; padding: 0 20px; }
+
+h1 { font-size: 22px; }
+h2 { font-size: 17px; margin-top: 0; }
+
+.muted { color: var(--muted); }
+.err { color: var(--danger); }
+code { background: rgba(128,128,128,0.18); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+
+.theme-toggle {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 4px 9px;
+  font-size: 15px;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.flash { padding: 10px 14px; border-radius: 8px; margin: 10px 0; }
+.flash.success { background: #e6f4ea; color: var(--ok); }
+.flash.error { background: #fdecea; color: var(--danger); }
+
+button, .btn {
+  font: inherit;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+button:hover, .btn:hover { opacity: 0.9; }
+button.danger, .btn.danger { background: var(--danger); border-color: var(--danger); }
+.btn-sm { padding: 5px 11px; font-size: 13px; border-radius: 7px; }
+
+/* Subtle button for secondary actions (Rename, Make active). */
+button.secondary {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+}
+button.secondary:hover { color: var(--accent); border-color: var(--accent); opacity: 1; }
+
+/* One tidy row of actions per table row. */
+.actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.actions form { display: inline-flex; gap: 6px; align-items: center; margin: 0; }
+.actions input[type=text] { width: 116px; margin: 0; padding: 5px 9px; }
+
+input[type=file], input[type=text], input[type=date], input[type=password], select {
+  font: inherit;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--ink);
+  margin-right: 8px;
+}
+
+.filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.filters label { color: var(--muted); }
+
+.tiles { display: flex; gap: 12px; flex-wrap: wrap; }
+.tile {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 20px;
+  min-width: 120px;
+}
+.tile .n { display: block; font-size: 26px; font-weight: 700; }
+.tile .l { color: var(--muted); font-size: 13px; }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0; background: var(--panel); }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: 13px; color: var(--muted); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+.badge {
+  background: var(--ok); color: #fff; font-size: 11px;
+  padding: 2px 7px; border-radius: 20px;
+}

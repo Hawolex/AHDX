@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ 'Set a password' if mode == 'setup' else 'Log in' }} — AHDX</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    (function () {
+      var t = localStorage.getItem('ahdx-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+</head>
+<body>
+  <main style="max-width: 360px; margin: 12vh auto;">
+    <div class="brand" style="margin-bottom: 16px;">AHDX<span>Apple Health Data eXporter</span></div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+    <div class="card">
+      {% if mode == 'setup' %}
+        <h2>Set a password</h2>
+        <p class="muted">The web UI is protected. Pick a password to use from now on.</p>
+        <form method="post" action="{{ url_for('setup') }}">
+          <p><input type="password" name="password" placeholder="Password" required style="width: 100%"></p>
+          <p><input type="password" name="confirm" placeholder="Confirm password" required style="width: 100%"></p>
+          <button type="submit">Set password</button>
+        </form>
+      {% else %}
+        <h2>Log in</h2>
+        <form method="post" action="{{ url_for('login') }}">
+          <p><input type="password" name="password" placeholder="Password" required autofocus style="width: 100%"></p>
+          <button type="submit">Log in</button>
+        </form>
+      {% endif %}
+    </div>
+  </main>
+</body>
+</html>

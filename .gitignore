@@ -1,0 +1,13 @@
+# Your health data. Never commit this.
+data/
+
+# Grafana's own state (dashboards you make live here). Provisioning config under
+# grafana/ IS committed; this runtime dir is not.
+grafana-data/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local env
+.env

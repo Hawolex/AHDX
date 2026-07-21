@@ -1,0 +1,17 @@
+# Auto-adds the Infinity datasource, pointed at the AHDX container over the
+# internal Docker network (so no host IP needed). Panels query paths like
+# /api/daily?db=Steffen&type=...&agg=sum against this base URL.
+apiVersion: 1
+
+datasources:
+  - name: AHDX
+    uid: ahdx-infinity          # fixed, so the shipped dashboard can reference it
+    type: yesoreyeram-infinity-datasource
+    access: proxy
+    url: http://ahdx:8080
+    isDefault: true
+    jsonData:
+      # If you set AHDX_API_KEY, add it as a header here:
+      # httpHeaderName1: X-Api-Key
+      # and put the value under secureJsonData.httpHeaderValue1
+      tlsSkipVerify: true

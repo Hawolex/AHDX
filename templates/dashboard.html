@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — AHDX{% endblock %}
+{% block body %}
+<h1>Dashboard</h1>
+
+{% if cards %}
+<div class="tiles">
+  {% for c in cards %}
+  <div class="tile">
+    <span class="n">{{ c['value'] }}{% if c['unit'] %} <small>{{ c['unit'] }}</small>{% endif %}</span>
+    <span class="l">{{ c['label'] }}{% if c['when'] %} · {{ c['when'] }}{% endif %}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<h2 style="margin-top:24px;">What's in here</h2>
+<div class="tiles">
+  <div class="tile"><span class="n">{{ totals['n'] or 0 }}</span><span class="l">records</span></div>
+  <div class="tile"><span class="n">{{ types|length }}</span><span class="l">types</span></div>
+  <div class="tile"><span class="n">{{ workouts }}</span><span class="l">workouts</span></div>
+  <div class="tile"><span class="n">{{ summaries }}</span><span class="l">day summaries</span></div>
+</div>
+
+<p class="muted">
+  {% if totals['first'] %}
+    Data spans {{ totals['first'][:10] }} to {{ totals['last'][:10] }}.
+  {% else %}
+    This database is empty. Import an export on the <a href="{{ url_for('index') }}">Import</a> page.
+  {% endif %}
+</p>
+
+{% if types %}
+<h2>Record types</h2>
+<table>
+  <thead><tr><th>Type</th><th class="num">Count</th><th>From</th><th>To</th><th></th></tr></thead>
+  <tbody>
+    {% for t in types %}
+    <tr>
+      <td>{{ t['type'].replace('HKQuantityTypeIdentifier','').replace('HKCategoryTypeIdentifier','') }}</td>
+      <td class="num">{{ t['n'] }}</td>
+      <td>{{ t['first'][:10] if t['first'] else '' }}</td>
+      <td>{{ t['last'][:10] if t['last'] else '' }}</td>
+      <td><a href="{{ url_for('browse', type=t['type']) }}">browse</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}

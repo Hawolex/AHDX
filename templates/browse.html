@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Browse — AHDX{% endblock %}
+{% block body %}
+<h1>Browse records</h1>
+
+<form method="get" class="filters">
+  <select name="type">
+    <option value="">All types</option>
+    {% for t in types %}
+    <option value="{{ t }}" {% if t == sel_type %}selected{% endif %}>
+      {{ t.replace('HKQuantityTypeIdentifier','').replace('HKCategoryTypeIdentifier','') }}
+    </option>
+    {% endfor %}
+  </select>
+  <label>From <input type="date" name="start" value="{{ start }}"></label>
+  <label>To <input type="date" name="end" value="{{ end }}"></label>
+  <button type="submit">Filter</button>
+  <a class="btn" href="{{ url_for('export_csv', type=sel_type, start=start, end=end) }}">Download CSV</a>
+</form>
+
+<p class="muted">Showing up to 500 rows, newest first. The CSV download has no limit.</p>
+
+<table>
+  <thead><tr><th>Type</th><th>Value</th><th>Unit</th><th>Source</th><th>Start</th></tr></thead>
+  <tbody>
+    {% for r in rows %}
+    <tr>
+      <td>{{ r['type'].replace('HKQuantityTypeIdentifier','').replace('HKCategoryTypeIdentifier','') }}</td>
+      <td class="num">{{ r['value'] }}</td>
+      <td>{{ r['unit'] or '' }}</td>
+      <td>{{ r['source_name'] or '' }}</td>
+      <td>{{ r['start_date'] }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="muted">No records match. Try a different type or date range.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

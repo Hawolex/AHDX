@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}ECG — AHDX{% endblock %}
+{% block body %}
+<a href="{{ url_for('ecg') }}">&larr; ECG</a>
+<h1>ECG {{ (ecg['recorded_date'] or '')[:19] }}</h1>
+<p class="muted">
+  {{ ecg['classification'] or 'no classification' }}
+  {% if ecg['sample_rate'] %} · {{ ecg['sample_rate']|int }} Hz{% endif %}
+  {% if ecg['duration_s'] %} · {{ '%.0f'|format(ecg['duration_s']) }} s{% endif %}
+</p>
+
+<div class="card">
+  <svg id="ecg" viewBox="0 0 1000 260" style="width: 100%; height: auto;"></svg>
+  <p class="muted">Thinned for display. The full waveform is in the database.</p>
+</div>
+
+<script>
+const S = {{ samples|tojson }};
+(function () {
+  const svg = document.getElementById("ecg");
+  if (!S.length) { svg.outerHTML = "<p class='muted'>No samples.</p>"; return; }
+  const W = 1000, H = 260, pad = 10;
+  const lo = Math.min(...S), hi = Math.max(...S), r = (hi - lo) || 1;
+  const px = i => pad + (i / (S.length - 1 || 1)) * (W - 2 * pad);
+  const py = v => pad + (1 - (v - lo) / r) * (H - 2 * pad);
+  let d = "";
+  S.forEach((v, i) => { d += (i ? "L" : "M") + px(i).toFixed(1) + " " + py(v).toFixed(1) + " "; });
+  svg.innerHTML = `<path d="${d}" style="fill:none;stroke:var(--accent);stroke-width:1"/>`;
+})();
+</script>
+{% endblock %}

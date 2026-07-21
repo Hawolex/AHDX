@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Routes — AHDX{% endblock %}
+{% block body %}
+<h1>GPS routes</h1>
+<p class="muted">From the workout-routes files in your export. Click one to see its shape.</p>
+<table>
+  <thead><tr><th>Date</th><th>File</th><th class="num">Points</th></tr></thead>
+  <tbody>
+    {% for r in routes %}
+    <tr>
+      <td>{{ (r['start_date'] or '')[:10] }}</td>
+      <td><a href="{{ url_for('route_detail', route_id=r['id']) }}">{{ r['filename'] }}</a></td>
+      <td class="num">{{ r['point_count'] }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3" class="muted">No routes yet. Import an <code>export.zip</code> (not just the xml) and they'll show up.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,13 @@
+# Loads the bundled dashboards from /etc/dashboards (mounted from
+# ./grafana/dashboards). allowUiUpdates lets you keep editing them in the UI.
+apiVersion: 1
+
+providers:
+  - name: AHDX
+    type: file
+    disableDeletion: false
+    allowUiUpdates: true
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/dashboards
+      foldersFromFilesStructure: false

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Trends — AHDX{% endblock %}
+{% block body %}
+<h1>Trends</h1>
+
+<form method="get" class="filters">
+  <select name="type">
+    {% for t in types %}
+    <option value="{{ t }}" {% if t == sel_type %}selected{% endif %}>
+      {{ t.replace('HKQuantityTypeIdentifier','').replace('HKCategoryTypeIdentifier','') }}
+    </option>
+    {% endfor %}
+  </select>
+  <select name="agg">
+    {% for a in ['avg', 'sum', 'min', 'max', 'count'] %}
+    <option value="{{ a }}" {% if a == agg %}selected{% endif %}>{{ a }} per day</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Show</button>
+</form>
+
+{% if stats and stats['n'] %}
+<div class="tiles" style="margin: 12px 0;">
+  <div class="tile"><span class="n">{{ stats['n'] }}</span><span class="l">samples</span></div>
+  <div class="tile"><span class="n">{{ '%.1f'|format(stats['avg']) if stats['avg'] is not none else '–' }}</span><span class="l">avg {{ stats['unit'] or '' }}</span></div>
+  <div class="tile"><span class="n">{{ '%.1f'|format(stats['min']) if stats['min'] is not none else '–' }}</span><span class="l">min</span></div>
+  <div class="tile"><span class="n">{{ '%.1f'|format(stats['max']) if stats['max'] is not none else '–' }}</span><span class="l">max</span></div>
+</div>
+{% endif %}
+
+<div class="card">
+  <svg id="chart" viewBox="0 0 800 300" style="width: 100%; height: auto;"></svg>
+  <p class="muted" id="chart-note"></p>
+</div>
+
+<script>
+// Points come straight from the daily rollup query: [["2026-07-20", 812], ...].
+const POINTS = {{ points|tojson }};
+(function () {
+  const svg = document.getElementById("chart");
+  const note = document.getElementById("chart-note");
+  if (!POINTS.length) { note.textContent = "No data for this metric yet."; return; }
+
+  const W = 800, H = 300, padL = 50, padR = 10, padT = 12, padB = 22;
+  const ys = POINTS.map(p => p[1]);
+  const ymin = Math.min(...ys), ymax = Math.max(...ys), yr = (ymax - ymin) || 1;
+  const px = i => padL + (i / (POINTS.length - 1 || 1)) * (W - padL - padR);
+  const py = v => padT + (1 - (v - ymin) / yr) * (H - padT - padB);
+
+  let d = "";
+  POINTS.forEach((p, i) => { d += (i ? "L" : "M") + px(i).toFixed(1) + " " + py(p[1]).toFixed(1) + " "; });
+
+  const fmt = v => Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(1);
+  svg.innerHTML =
+    `<line x1="${padL}" y1="${py(ymin)}" x2="${W - padR}" y2="${py(ymin)}" style="stroke:var(--line)"/>` +
+    `<text x="6" y="${py(ymax) + 4}" font-size="11" style="fill:var(--muted)">${fmt(ymax)}</text>` +
+    `<text x="6" y="${py(ymin) + 4}" font-size="11" style="fill:var(--muted)">${fmt(ymin)}</text>` +
+    `<text x="${padL}" y="${H - 6}" font-size="11" style="fill:var(--muted)">${POINTS[0][0]}</text>` +
+    `<text x="${W - padR}" y="${H - 6}" font-size="11" text-anchor="end" style="fill:var(--muted)">${POINTS[POINTS.length - 1][0]}</text>` +
+    `<path d="${d}" style="fill:none;stroke:var(--accent);stroke-width:2"/>`;
+  note.textContent = POINTS.length + " days, " + POINTS[0][0] + " to " + POINTS[POINTS.length - 1][0];
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Databases — AHDX{% endblock %}
+{% block body %}
+<h1>Databases</h1>
+<p class="muted">
+  Each database is its own <code>.db</code> file under the data volume. Keep one
+  per person, one per year, or a scratch one to test an import. Imports always go
+  into the active database.
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th class="num">Size</th>
+      <th class="num">Records</th>
+      <th class="num">Workouts</th>
+      <th>Last import</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in overview %}
+    <tr>
+      <td>
+        <strong>{{ d['name'] }}</strong>
+        {% if d['is_active'] %}<span class="badge">active</span>{% endif %}
+        <div class="muted" style="font-size:0.8rem;">{{ d['filename'] }}</div>
+      </td>
+      <td class="num">{{ d['size_h'] }}</td>
+      <td class="num">{{ '{:,}'.format(d['records']) }}</td>
+      <td class="num">{{ d['workouts'] }}</td>
+      <td class="muted">{{ d['last_import'][:16] if d['last_import'] else '—' }}</td>
+      <td>
+        <div class="actions">
+          {% if not d['is_active'] %}
+          <form method="post" action="{{ url_for('activate_database', db_id=d['id']) }}">
+            <button type="submit" class="btn-sm">Make active</button>
+          </form>
+          {% endif %}
+          <form method="post" action="{{ url_for('rename_database', db_id=d['id']) }}">
+            <input type="text" name="name" placeholder="Rename to…" required>
+            <button type="submit" class="btn-sm secondary">Rename</button>
+          </form>
+          <form method="post" action="{{ url_for('delete_database', db_id=d['id']) }}"
+                onsubmit="return confirm('Delete {{ d['name'] }} and its data file? This cannot be undone.');">
+            <button type="submit" class="btn-sm danger">Delete</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<form method="post" action="{{ url_for('new_database') }}" class="card" style="max-width:360px;">
+  <h2>New database</h2>
+  <input type="text" name="name" placeholder="e.g. Steffen, or Anette" required>
+  <button type="submit">Create</button>
+</form>
+
+<div class="card muted">
+  <h2>Read API</h2>
+  <p>Pull data out for Grafana or scripts. Open
+  <a href="{{ url_for('api_index') }}"><code>/api</code></a> for the menu.
+  Pick a database with <code>?db=Name</code>. Example:
+  <code>/api/daily?db=Steffen&amp;type=HKQuantityTypeIdentifierStepCount&amp;agg=sum</code></p>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}ECG — AHDX{% endblock %}
+{% block body %}
+<h1>ECG readings</h1>
+<p class="muted">From the electrocardiograms in your export. Click one to see the trace.</p>
+<table>
+  <thead><tr><th>Recorded</th><th>Classification</th><th class="num">Rate</th><th class="num">Length</th><th>File</th></tr></thead>
+  <tbody>
+    {% for e in items %}
+    <tr>
+      <td><a href="{{ url_for('ecg_detail', ecg_id=e['id']) }}">{{ (e['recorded_date'] or '')[:19] or 'unknown' }}</a></td>
+      <td>{{ e['classification'] or '' }}</td>
+      <td class="num">{{ (e['sample_rate']|int) ~ ' Hz' if e['sample_rate'] else '' }}</td>
+      <td class="num">{{ ('%.0f s'|format(e['duration_s'])) if e['duration_s'] else '' }}</td>
+      <td class="muted">{{ e['filename'] }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="5" class="muted">No ECG readings. They only exist if you've taken ECGs and you import the full <code>export.zip</code>.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

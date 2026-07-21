@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AHDX{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script>
+    // Apply the saved theme before the page paints, so there's no flash.
+    (function () {
+      var t = localStorage.getItem('ahdx-theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    })();
+    function toggleTheme() {
+      var r = document.documentElement;
+      var cur = r.getAttribute('data-theme') ||
+        (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = cur === 'dark' ? 'light' : 'dark';
+      r.setAttribute('data-theme', next);
+      localStorage.setItem('ahdx-theme', next);
+    }
+  </script>
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <header>
+    <div class="brand">AHDX<span>Apple Health Data eXporter</span></div>
+    <nav>
+      <a href="{{ url_for('index') }}">Import</a>
+      <a href="{{ url_for('dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('trends') }}">Trends</a>
+      <a href="{{ url_for('browse') }}">Browse</a>
+      <a href="{{ url_for('routes') }}">Routes</a>
+      <a href="{{ url_for('ecg') }}">ECG</a>
+      <a href="{{ url_for('databases') }}">Databases</a>
+    </nav>
+    <div class="db-picker">
+      Database: <strong>{{ active_db['name'] if active_db else '—' }}</strong>
+    </div>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Light / dark">◐</button>
+    {% if auth_enabled %}
+    <a class="btn" href="{{ url_for('logout') }}">Log out</a>
+    {% endif %}
+  </header>
+  <main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">{{ msg }}</div>
+      {% endfor %}
+    {% endwith %}
+    {% block body %}{% endblock %}
+  </main>
+</body>
+</html>

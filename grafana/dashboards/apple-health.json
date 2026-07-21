@@ -1,0 +1,1589 @@
+{
+ "editable": true,
+ "id": null,
+ "panels": [
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "green",
+        "value": null
+       }
+      ]
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 0,
+    "y": 0
+   },
+   "id": 1,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Steps",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierStepCount&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Steps",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "red",
+        "value": null
+       }
+      ]
+     },
+     "unit": "none"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 4,
+    "y": 0
+   },
+   "id": 2,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Resting HR",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierRestingHeartRate&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Resting HR",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "blue",
+        "value": null
+       }
+      ]
+     },
+     "unit": "masskg"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 8,
+    "y": 0
+   },
+   "id": 3,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Weight",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierBodyMass&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Weight",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "#4ECDC4",
+        "value": null
+       }
+      ]
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 12,
+    "y": 0
+   },
+   "id": 4,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "VO₂ max",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierVO2Max&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "VO₂ max",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "purple",
+        "value": null
+       }
+      ]
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 16,
+    "y": 0
+   },
+   "id": 5,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Active energy",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierActiveEnergyBurned&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Active energy",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "orange",
+        "value": null
+       }
+      ]
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 4,
+    "x": 20,
+    "y": 0
+   },
+   "id": 6,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "area",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Exercise min",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierAppleExerciseTime&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Exercise min",
+   "type": "stat"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "green",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "bars",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "never",
+      "spanNulls": true
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 5
+   },
+   "id": 10,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Steps per day",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierStepCount&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Steps per day",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "purple",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "bars",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "never",
+      "spanNulls": true
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 12,
+    "y": 5
+   },
+   "id": 11,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Active energy per day",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierActiveEnergyBurned&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Active energy per day",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "red",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "never",
+      "spanNulls": true
+     },
+     "unit": "none"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 13
+   },
+   "id": 12,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Resting heart rate",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierRestingHeartRate&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Resting heart rate",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "blue",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "always",
+      "spanNulls": true
+     },
+     "unit": "masskg"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 12,
+    "y": 13
+   },
+   "id": 13,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Weight",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierBodyMass&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Weight",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "orange",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "never",
+      "spanNulls": true
+     },
+     "unit": "none"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 0,
+    "y": 21
+   },
+   "id": 14,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Heart rate (daily avg)",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierHeartRate&agg=avg",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Heart rate (daily avg)",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "yellow",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "bars",
+      "fillOpacity": 14,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "pointSize": 5,
+      "showPoints": "never",
+      "spanNulls": true
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 8,
+    "w": 12,
+    "x": 12,
+    "y": 21
+   },
+   "id": 15,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "value",
+       "text": "Exercise minutes per day",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/daily?db=${db}&type=HKQuantityTypeIdentifierAppleExerciseTime&agg=sum",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Exercise minutes per day",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 9,
+    "w": 24,
+    "x": 0,
+    "y": 59
+   },
+   "id": 20,
+   "options": {
+    "cellHeight": "sm",
+    "showHeader": true,
+    "sortBy": [
+     {
+      "desc": true,
+      "displayName": "Start"
+     }
+    ]
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "start_date",
+       "text": "Start",
+       "type": "string"
+      },
+      {
+       "selector": "activity_type",
+       "text": "Activity",
+       "type": "string"
+      },
+      {
+       "selector": "total_distance",
+       "text": "Distance",
+       "type": "number"
+      },
+      {
+       "selector": "total_energy",
+       "text": "Energy (kcal)",
+       "type": "number"
+      },
+      {
+       "selector": "duration",
+       "text": "Duration (min)",
+       "type": "number"
+      },
+      {
+       "selector": "source_name",
+       "text": "Source",
+       "type": "string"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "table",
+     "parser": "backend",
+     "refId": "A",
+     "source": "url",
+     "type": "json",
+     "url": "/api/workouts?db=${db}",
+     "url_options": {
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Recent workouts",
+   "type": "table"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "max": 100,
+     "min": 0,
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "red",
+        "value": null
+       },
+       {
+        "color": "orange",
+        "value": 60
+       },
+       {
+        "color": "green",
+        "value": 80
+       }
+      ]
+     },
+     "unit": "none"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 7,
+    "w": 6,
+    "x": 0,
+    "y": 29
+   },
+   "id": 30,
+   "options": {
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "showThresholdLabels": false,
+    "showThresholdMarkers": true
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "score",
+       "text": "Sleep score",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "root_selector": "",
+     "source": "url",
+     "type": "json",
+     "url": "/api/sleep?db=${db}",
+     "url_options": {
+      "data": "",
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Sleep score (last night)",
+   "type": "gauge"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "custom": {
+      "drawStyle": "bars",
+      "fillOpacity": 80,
+      "lineWidth": 0,
+      "stacking": {
+       "group": "A",
+       "mode": "normal"
+      }
+     },
+     "unit": "h"
+    },
+    "overrides": [
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Deep"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "fixedColor": "dark-blue",
+         "mode": "fixed"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Core"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "fixedColor": "blue",
+         "mode": "fixed"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "REM"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "fixedColor": "#4ECDC4",
+         "mode": "fixed"
+        }
+       }
+      ]
+     },
+     {
+      "matcher": {
+       "id": "byName",
+       "options": "Awake"
+      },
+      "properties": [
+       {
+        "id": "color",
+        "value": {
+         "fixedColor": "orange",
+         "mode": "fixed"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "gridPos": {
+    "h": 7,
+    "w": 18,
+    "x": 6,
+    "y": 29
+   },
+   "id": 31,
+   "options": {
+    "legend": {
+     "displayMode": "list",
+     "placement": "bottom",
+     "showLegend": true
+    },
+    "tooltip": {
+     "mode": "multi",
+     "sort": "none"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "deep_h",
+       "text": "Deep",
+       "type": "number"
+      },
+      {
+       "selector": "core_h",
+       "text": "Core",
+       "type": "number"
+      },
+      {
+       "selector": "rem_h",
+       "text": "REM",
+       "type": "number"
+      },
+      {
+       "selector": "awake_h",
+       "text": "Awake",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "table",
+     "parser": "backend",
+     "refId": "A",
+     "root_selector": "",
+     "source": "url",
+     "type": "json",
+     "url": "/api/sleep?db=${db}",
+     "url_options": {
+      "data": "",
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Sleep stages per night (hours)",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "fixedColor": "purple",
+      "mode": "fixed"
+     },
+     "custom": {
+      "drawStyle": "line",
+      "fillOpacity": 12,
+      "lineInterpolation": "smooth",
+      "lineWidth": 2,
+      "showPoints": "never"
+     },
+     "max": 100,
+     "min": 0,
+     "unit": "none"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 6,
+    "w": 24,
+    "x": 0,
+    "y": 36
+   },
+   "id": 32,
+   "options": {
+    "legend": {
+     "showLegend": false
+    },
+    "tooltip": {
+     "mode": "single"
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "time",
+       "text": "time",
+       "type": "timestamp"
+      },
+      {
+       "selector": "score",
+       "text": "Sleep score",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "timeseries",
+     "parser": "backend",
+     "refId": "A",
+     "root_selector": "",
+     "source": "url",
+     "type": "json",
+     "url": "/api/sleep?db=${db}",
+     "url_options": {
+      "data": "",
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Sleep score over time",
+   "type": "timeseries"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 12,
+    "w": 24,
+    "x": 0,
+    "y": 42
+   },
+   "id": 33,
+   "options": {
+    "basemap": {
+     "config": {
+      "showLabels": true,
+      "theme": "auto"
+     },
+     "name": "Basemap",
+     "tooltip": false,
+     "type": "carto"
+    },
+    "controls": {
+     "mouseWheelZoom": true,
+     "showAttribution": true,
+     "showDebug": false,
+     "showMeasure": false,
+     "showScale": false,
+     "showZoom": true
+    },
+    "layers": [
+     {
+      "config": {
+       "showLegend": false,
+       "style": {
+        "color": {
+         "fixed": "blue"
+        },
+        "opacity": 0.6,
+        "size": {
+         "fixed": 3,
+         "max": 8,
+         "min": 2
+        },
+        "symbol": {
+         "fixed": "img/icons/marker/circle.svg",
+         "mode": "fixed"
+        },
+        "textConfig": {
+         "fontSize": 12,
+         "textAlign": "center",
+         "textBaseline": "middle"
+        }
+       }
+      },
+      "filterData": {
+       "id": "byRefId",
+       "options": "A"
+      },
+      "location": {
+       "latitude": "lat",
+       "longitude": "lon",
+       "mode": "coords"
+      },
+      "name": "Layer 1",
+      "tooltip": false,
+      "type": "markers"
+     }
+    ],
+    "tooltip": {
+     "mode": "none"
+    },
+    "view": {
+     "allLayers": true,
+     "id": "fit",
+     "lastOnly": false,
+     "lat": 60.9,
+     "layer": "Layer 1",
+     "lon": 10.9,
+     "padding": 10,
+     "zoom": 12
+    }
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "lat",
+       "text": "lat",
+       "type": "number"
+      },
+      {
+       "selector": "lon",
+       "text": "lon",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "table",
+     "parser": "backend",
+     "refId": "A",
+     "root_selector": "",
+     "source": "url",
+     "type": "json",
+     "url": "/api/route?db=${db}&id=${route}",
+     "url_options": {
+      "data": "",
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Workout route  (choose it in the Route dropdown up top)",
+   "type": "geomap"
+  },
+  {
+   "datasource": {
+    "type": "yesoreyeram-infinity-datasource",
+    "uid": "ahdx-infinity"
+   },
+   "fieldConfig": {
+    "defaults": {
+     "color": {
+      "mode": "thresholds"
+     },
+     "thresholds": {
+      "mode": "absolute",
+      "steps": [
+       {
+        "color": "blue",
+        "value": null
+       }
+      ]
+     },
+     "unit": "short"
+    },
+    "overrides": []
+   },
+   "gridPos": {
+    "h": 5,
+    "w": 24,
+    "x": 0,
+    "y": 54
+   },
+   "id": 34,
+   "options": {
+    "colorMode": "value",
+    "graphMode": "none",
+    "justifyMode": "center",
+    "reduceOptions": {
+     "calcs": [
+      "lastNotNull"
+     ],
+     "fields": "",
+     "values": false
+    },
+    "textMode": "value_and_name"
+   },
+   "targets": [
+    {
+     "columns": [
+      {
+       "selector": "activity",
+       "text": "Activity",
+       "type": "string"
+      },
+      {
+       "selector": "distance_km",
+       "text": "Distance (km)",
+       "type": "number"
+      },
+      {
+       "selector": "duration_min",
+       "text": "Duration (min)",
+       "type": "number"
+      },
+      {
+       "selector": "energy_kcal",
+       "text": "Calories (kcal)",
+       "type": "number"
+      },
+      {
+       "selector": "elevation_gain_m",
+       "text": "Elevation ↑ (m)",
+       "type": "number"
+      },
+      {
+       "selector": "avg_speed_kmh",
+       "text": "Speed (km/h)",
+       "type": "number"
+      }
+     ],
+     "datasource": {
+      "type": "yesoreyeram-infinity-datasource",
+      "uid": "ahdx-infinity"
+     },
+     "format": "table",
+     "parser": "backend",
+     "refId": "A",
+     "root_selector": "",
+     "source": "url",
+     "type": "json",
+     "url": "/api/route/stats?db=${db}&id=${route}",
+     "url_options": {
+      "data": "",
+      "method": "GET"
+     }
+    }
+   ],
+   "title": "Selected route",
+   "type": "stat"
+  }
+ ],
+ "refresh": "",
+ "schemaVersion": 39,
+ "tags": [
+  "ahdx"
+ ],
+ "templating": {
+  "list": [
+   {
+    "current": {},
+    "datasource": {
+     "type": "yesoreyeram-infinity-datasource",
+     "uid": "ahdx-infinity"
+    },
+    "definition": "AHDX databases",
+    "hide": 0,
+    "includeAll": false,
+    "label": "Person",
+    "multi": false,
+    "name": "db",
+    "options": [],
+    "query": {
+     "infinityQuery": {
+      "columns": [
+       {
+        "selector": "name",
+        "text": "",
+        "type": "string"
+       }
+      ],
+      "filters": [],
+      "format": "table",
+      "parser": "backend",
+      "refId": "variable",
+      "root_selector": "",
+      "source": "url",
+      "type": "json",
+      "url": "/api/databases",
+      "url_options": {
+       "data": "",
+       "method": "GET"
+      }
+     },
+     "query": "",
+     "queryType": "infinity"
+    },
+    "refresh": 1,
+    "regex": "",
+    "sort": 1,
+    "type": "query"
+   },
+   {
+    "current": {},
+    "datasource": {
+     "type": "yesoreyeram-infinity-datasource",
+     "uid": "ahdx-infinity"
+    },
+    "definition": "AHDX routes",
+    "hide": 0,
+    "includeAll": false,
+    "label": "Route",
+    "multi": false,
+    "name": "route",
+    "options": [],
+    "query": {
+     "infinityQuery": {
+      "columns": [
+       {
+        "selector": "filename",
+        "text": "__text",
+        "type": "string"
+       },
+       {
+        "selector": "id",
+        "text": "__value",
+        "type": "string"
+       }
+      ],
+      "filters": [],
+      "format": "table",
+      "parser": "backend",
+      "refId": "variable",
+      "root_selector": "",
+      "source": "url",
+      "type": "json",
+      "url": "/api/routes?db=${db}",
+      "url_options": {
+       "data": "",
+       "method": "GET"
+      }
+     },
+     "query": "",
+     "queryType": "infinity"
+    },
+    "refresh": 2,
+    "regex": "",
+    "sort": 0,
+    "type": "query"
+   }
+  ]
+ },
+ "time": {
+  "from": "now-1y",
+  "to": "now"
+ },
+ "timezone": "",
+ "title": "Apple Health",
+ "uid": "ahdx-health",
+ "version": 1
+}

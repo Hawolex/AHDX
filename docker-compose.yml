@@ -1,0 +1,51 @@
+services:
+  ahdx:
+    build: .
+    container_name: ahdx
+    ports:
+      # Host port is configurable; set AHDX_PORT to move it. Default 8088.
+      - "${AHDX_PORT:-8088}:8080"
+    volumes:
+      # Your data stays in ./data on the host. Delete the container any time;
+      # the databases and inbox are untouched.
+      - ./data:/data
+    environment:
+      # How often the inbox folder is checked, in seconds. Set to 0 to turn the
+      # watcher off and only import by hand.
+      - AHDX_SCAN_INTERVAL=1800
+      # Password-protect the web UI. On first run AHDX has no password in its DB,
+      # so it takes you to a setup screen to create one (stored salted). That
+      # same password is then pushed to Grafana, so one login covers both.
+      - AHDX_AUTH=true
+      # Optional shared key for the read API at /api (used by Grafana, scripts).
+      # Leave blank to keep the API open on your LAN; set a value to require it
+      # as the X-Api-Key header.
+      - AHDX_API_KEY=
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: ahdx-grafana
+    ports:
+      - "${GRAFANA_PORT:-3000}:3000"
+    environment:
+      # The Infinity datasource reads AHDX's JSON API. Installed on first boot.
+      - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
+      - GF_SECURITY_ADMIN_USER=admin
+      # Grafana keeps its default admin/admin at first boot; AHDX changes it to
+      # the password you set on the AHDX setup screen. Don't pin it here or AHDX
+      # can't bootstrap it.
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+      # Auto-adds the "AHDX" datasource + the Apple Health dashboard.
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/dashboards
+    depends_on:
+      ahdx:
+        condition: service_healthy   # Grafana waits until AHDX is up
+    restart: unless-stopped

@@ -1,0 +1,11 @@
+{% if status %}
+  <p><strong>State:</strong> {{ status['state'] or 'idle' }}</p>
+  {% if status['source'] %}<p><strong>Source:</strong> {{ status['source'] }}</p>{% endif %}
+  <p><strong>Rows read:</strong> {{ status['records_seen'] or 0 }}
+     &nbsp; <strong>new rows added:</strong> {{ status['records_new'] or 0 }}</p>
+  {% if status['current_type'] %}<p><strong>Now reading:</strong> {{ status['current_type'] }}</p>{% endif %}
+  {% if status['message'] %}<p class="err">{{ status['message'] }}</p>{% endif %}
+  {% if status['finished_at'] %}<p class="muted">Finished {{ status['finished_at'] }} UTC</p>{% endif %}
+{% else %}
+  <p class="muted">Nothing imported yet.</p>
+{% endif %}
