@@ -75,14 +75,28 @@ Apple has no free server-side API, so a fully automatic *full-history* export
 isn't possible — that part stays a manual tap. Automatic *recent* data works fine
 through the Shortcut.
 
-## More than one person
+## More than one person (works for a whole household)
 
-Each person is their own database. On the **Databases** page you can create,
-rename, switch, and delete them, and see each one's size and record counts.
-Imports go into whichever database is active.
+Each person gets their own database, and Grafana picks them up on its own — the
+**Person** dropdown reads the list of databases live, so you never touch the
+dashboard.
 
-In Grafana, the **Person** dropdown up top switches the whole dashboard between
-them.
+Say it's a family of five:
+
+1. On the **Databases** page, make a database and name it (e.g. `Mom`). Creating
+   it makes it active.
+2. On **Import**, drop Mom's `export.zip`.
+3. Repeat for `Dad`, `Kid1`, `Kid2`, `Kid3` — one database each, import once.
+
+Now open Grafana, and all five are in the **Person** dropdown. Pick anyone and
+the whole board — stats, sleep, the route map — switches to them. Nothing to
+configure, no per-person dashboards to build.
+
+It stays fast because each person is a separate `.db` file, and a query only ever
+touches the person you've selected. Five people don't slow each other down.
+
+The same holds for the read API: `/api/daily?db=Mom&...`, `?db=Dad&...`, and so
+on, if you'd rather pull the data into your own tools.
 
 ## The Grafana dashboard
 
