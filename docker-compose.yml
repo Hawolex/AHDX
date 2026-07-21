@@ -41,7 +41,9 @@ services:
       # the password you set on the AHDX setup screen. Don't pin it here or AHDX
       # can't bootstrap it.
     volumes:
-      - ./grafana-data:/var/lib/grafana
+      # Named volume (not a host bind mount) so Grafana's user can write to it
+      # on any host — a bind-mounted dir trips file-permission errors on Linux.
+      - grafana-data:/var/lib/grafana
       # Auto-adds the "AHDX" datasource + the Apple Health dashboard.
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/etc/dashboards
@@ -49,3 +51,6 @@ services:
       ahdx:
         condition: service_healthy   # Grafana waits until AHDX is up
     restart: unless-stopped
+
+volumes:
+  grafana-data:

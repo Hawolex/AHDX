@@ -151,8 +151,10 @@ def login():
     if not _has_password():
         return redirect(url_for("setup"))
     if request.method == "POST":
-        if _check_password(request.form.get("password", "")):
+        pw = request.form.get("password", "")
+        if _check_password(pw):
             session["authed"] = True
+            _sync_grafana_password(pw)   # self-heal if the setup-time sync missed
             return redirect(url_for("index"))
         flash("Wrong password.", "error")
     return render_template("auth.html", mode="login")
