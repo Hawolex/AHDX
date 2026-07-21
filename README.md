@@ -33,11 +33,15 @@ cd ahdx
 docker compose up -d --build
 ```
 
-That starts two things: **AHDX** on http://localhost:8088 and **Grafana** on
-http://localhost:3000. Grafana waits for AHDX to be healthy before it starts, so
-the first boot takes a minute.
+That starts two things: **AHDX** on `http://<host-ip>:8088` and **Grafana** on
+`http://<host-ip>:3000`. Grafana waits for AHDX to be healthy before it starts,
+so the first boot takes a minute.
 
-Open http://localhost:8088. On the first visit it asks you to **set a password**.
+`<host-ip>` is the machine running Docker — use `localhost` if that's the same
+computer you're browsing from, or its LAN address (e.g. `192.168.1.50`) if it's
+a server.
+
+Open `http://<host-ip>:8088`. On the first visit it asks you to **set a password**.
 That password is stored salted in AHDX, and it also becomes the Grafana admin
 password (user `admin`), so you set it once and it works for both.
 
