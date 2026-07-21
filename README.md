@@ -17,6 +17,11 @@ routes on a real map, per person:
 
 ![Dashboard — Kari](docs/screenshots/dashboard-kari.png)
 
+Each workout route on a map, with its own stats — distance, time, calories,
+elevation, pace:
+
+![Workout route with stats](docs/screenshots/dashboard-route.png)
+
 ## Get it running
 
 You need Docker (Docker Desktop on Windows/Mac, or Docker Engine on Linux).
